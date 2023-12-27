@@ -23,6 +23,6 @@ typedef struct sBaseSetup {
 	int width;
 	int height;
 	Fruit fruit;
-};
+} BaseSetup;
 
 #endif
