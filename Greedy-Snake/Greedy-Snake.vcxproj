@@ -127,10 +127,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\draw.c" />
+    <ClCompile Include="source\input.c" />
+    <ClCompile Include="source\logic.c" />
     <ClCompile Include="source\main.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\data.h" />
+    <ClInclude Include="include\draw.h" />
+    <ClInclude Include="include\input.h" />
+    <ClInclude Include="include\logic.h" />
+    <ClInclude Include="include\sleep.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

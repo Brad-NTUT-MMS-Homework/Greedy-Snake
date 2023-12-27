@@ -14,9 +14,30 @@
     <ClCompile Include="source\main.c">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="source\draw.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\input.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\logic.c">
+      <Filter>source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\data.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\draw.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\input.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\logic.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\sleep.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
