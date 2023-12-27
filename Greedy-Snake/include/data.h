@@ -3,7 +3,7 @@
 
 #include <stdbool.h>
 
-typedef enum tDirection {
+typedef enum eDirection {
 	STOP = 0, LEFT, RIGHT, UP, DOWN
 } Direction;
 
