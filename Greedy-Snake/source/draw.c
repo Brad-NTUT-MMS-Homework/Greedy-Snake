@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "Data.h"
+#include "../include/data.h"
 
 void Draw(Snake *snake, BaseSetup *baseSetup) {
 	// Implementation of the Draw function

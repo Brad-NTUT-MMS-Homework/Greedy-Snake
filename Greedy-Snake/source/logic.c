@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "Data.h"
+#include "../include/data.h"
 
 void Logic(Snake *snake, BaseSetup *baseSetup) {
 	// Implementation of the Logic function

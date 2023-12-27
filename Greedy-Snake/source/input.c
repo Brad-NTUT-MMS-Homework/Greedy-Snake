@@ -1,5 +1,5 @@
 #include <conio.h>
-#include "Data.h"
+#include "../include/data.h"
 
 void Input(Snake *snake) {
 	// Implementation of the Input function

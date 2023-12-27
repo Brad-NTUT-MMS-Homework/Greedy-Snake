@@ -1,10 +1,10 @@
 #include <stdio.h>
 
-#include "data.h"
-#include "draw.h"
-#include "input.h"
-#include "logic.h"
-#include "sleep.h"
+#include "../include/data.h"
+#include "../include/draw.h"
+#include "../include/input.h"
+#include "../include/logic.h"
+#include "../include/sleep.h"
 
 
 int main() {
