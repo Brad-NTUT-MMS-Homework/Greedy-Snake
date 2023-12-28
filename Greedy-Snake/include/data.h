@@ -14,7 +14,7 @@ typedef struct sPos {
 
 typedef struct sSnake {
 	Direction direction;
-	Position pos;
+	Position *pos;
 	bool gameover;
 	int length;
 	int score;
