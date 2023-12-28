@@ -7,13 +7,14 @@ typedef enum eDirection {
 	STOP = 0, LEFT, RIGHT, UP, DOWN
 } Direction;
 
-typedef struct sfruit {
+typedef struct sPos {
 	int xPos;
 	int yPos;
-} Fruit;
+} Position;
 
 typedef struct sSnake {
 	Direction direction;
+	Position pos;
 	bool gameover;
 	int length;
 	int score;
@@ -22,7 +23,7 @@ typedef struct sSnake {
 typedef struct sBaseSetup {
 	int width;
 	int height;
-	Fruit fruit;
+	Position fruit;
 } BaseSetup;
 
 #endif
