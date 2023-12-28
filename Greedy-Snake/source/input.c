@@ -6,42 +6,42 @@ void Input(Snake *snake) {
 	// Use the snake structure for processing input
 	switch (_getch()) {
 	case 'a':
-		snake->direction == LEFT;
-		break;
-	case 'd':
-		snake->direction == RIGHT;
-		break;
-	case 'w':
-		snake->direction == UP;
-		break;
-	case 's':
-		snake->direction == DOWN;
-		break;
 	case '\x1b[D':
 		snake->direction == LEFT;
 		break;
+	case 'd':
 	case '\x1b[C':
 		snake->direction == RIGHT;
 		break;
+	case 'w':
 	case '\x1b[A':
 		snake->direction == UP;
 		break;
+	case 's':
 	case '\x1b[B':
 		snake->direction == DOWN;
 		break;
 	case 'x':
 		snake->gameover = 1;
+		break;
+	default:
+		break;
 
-	if (snake->direction == UP) {
-		snake->pos.yPos--;
 	}
-	if (snake->direction == DOWN) {
-		snake->pos.yPos++;
+	for (int i = 0; i < snake->length; i++) {
+
+		if (snake->direction == UP) {
+			snake->pos[i].yPos--;
+		}
+		if (snake->direction == DOWN) {
+			snake->pos[i].yPos++;
+		}
+		if (snake->direction == LEFT) {
+			snake->pos[i].xPos--;
+		}
+		if (snake->direction == RIGHT) {
+			snake->pos[i].xPos++;
+		}
 	}
-	if (snake->direction == LEFT) {
-		snake->pos.xPos--;
-	}
-	if (snake->direction == RIGHT) {
-		snake->pos.xPos++;
-	}
+
 }
