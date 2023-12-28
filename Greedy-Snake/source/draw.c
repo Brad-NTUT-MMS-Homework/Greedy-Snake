@@ -15,14 +15,14 @@ void Draw(Snake *snake, BaseSetup *baseSetup) {
 		for (int j = 0; j < baseSetup->width; j++) {
 			if (j == 0)
 				printf("#");
-			if (i == snake->pos.yPos && j == snake->pos.xPos)
+			if (i == snake->pos[i].xPos && j == snake->pos[j].xPos)
 				printf("O");
 			else if (i == baseSetup->fruit.yPos && j == baseSetup->fruit.xPos)
 				printf("F");
 			else {
 				int printTail = 0;
 				for (int k = 1; k < snake->length; k++) {
-					if (i == snake->pos.yPos[k] && j == snake->pos.xPos[k]) {
+					if (i == snake->pos[k].yPos && j == snake->pos[k].xPos) {
 						printf("o");
 						printTail = 1;
 					}
@@ -35,3 +35,4 @@ void Draw(Snake *snake, BaseSetup *baseSetup) {
 		}
 		printf("\n");
 	}
+}
