@@ -15,7 +15,7 @@ int main() {
 
 	Position position[1] = { rand() % (WIDTH / 2) + 1, rand() % (HEIGHT / 2) + 1 };
 	Snake snake = { RIGHT, position, false, 1, 0 };
-	BaseSetup baseSetup = { 20, 50, {20 / 2, 50 / 2} };
+	BaseSetup baseSetup = { WIDTH, HEIGHT, {20 / 2, 50 / 2} };
 
 	while (!snake.gameover) {
 		Draw(&snake, &baseSetup);
