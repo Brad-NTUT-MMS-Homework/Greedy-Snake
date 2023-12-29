@@ -6,23 +6,28 @@
 void Draw(Snake *snake, BaseSetup *baseSetup) {
 	// Implementation of the Draw function
 	// Use snake and baseSetup structures for drawing
-	system("cls");
+	CLEAR_SCREEN();
 	for (int i = 0; i < baseSetup->width + 2; i++)
 		printf("#");
 	printf("\n");
 
-	for (int i = 0; i < baseSetup->height; i++) {
-		for (int j = 0; j < baseSetup->width; j++) {
-			if (j == 0)
+	for (int height = 0; height < baseSetup->height; height++) {
+		for (int width = 0; width < baseSetup->width; width++) {
+			if (width == 0)
 				printf("#");
-			if (i == snake->pos[i].xPos && j == snake->pos[j].xPos)
+			// Snake head
+			if (height == snake->pos[0].yPos &&
+				width == snake->pos[0].xPos)
 				printf("O");
-			else if (i == baseSetup->fruit.yPos && j == baseSetup->fruit.xPos)
+			else if (height == baseSetup->fruit.yPos &&
+				width == baseSetup->fruit.xPos)
 				printf("F");
+			// Snake body and tail
 			else {
 				int printTail = 0;
-				for (int k = 1; k < snake->length; k++) {
-					if (i == snake->pos[k].yPos && j == snake->pos[k].xPos) {
+				for (int posIdx = 0; posIdx < snake->length; posIdx++) {
+					if (height == snake->pos[posIdx].yPos &&
+						width == snake->pos[posIdx].xPos) {
 						printf("o");
 						printTail = 1;
 					}
@@ -30,9 +35,14 @@ void Draw(Snake *snake, BaseSetup *baseSetup) {
 				if (!printTail)
 					printf(" ");
 			}
-			if (j == baseSetup->width - 1)
+			if (width == baseSetup->width - 1)
 				printf("#");
 		}
 		printf("\n");
 	}
+
+	for (int i = 0; i < baseSetup->width + 2; i++)
+		printf("#");
+	printf("\n");
+	printf("Score:%d\n", snake->score);
 }
