@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <stdbool.h>
 
 #include "../include/data.h"
 #include "../include/draw.h"
@@ -6,10 +9,20 @@
 #include "../include/logic.h"
 #include "../include/sleep.h"
 
+#define WIDTH 20
+#define HEIGHT 10
 
 int main() {
-	Snake snake = { RIGHT, false, 1, 0 };
-	BaseSetup baseSetup = { 20, 50, {20 / 2, 50 / 2} };
+	srand(time(NULL));
+
+	Position position[1] = {
+		rand() % (WIDTH / 2) + 1,
+		rand() % (HEIGHT / 2) + 1
+	};
+	Snake snake = { RIGHT, position, false, 1, 0 };
+	BaseSetup baseSetup = {
+		WIDTH, HEIGHT, {WIDTH / 2, HEIGHT / 2}
+	};
 
 	while (!snake.gameover) {
 		Draw(&snake, &baseSetup);
