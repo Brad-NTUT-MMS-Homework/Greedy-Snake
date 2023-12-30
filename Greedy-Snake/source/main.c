@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdbool.h>
+#include <conio.h>
 
 #include "../include/data.h"
 #include "../include/draw.h"
@@ -11,23 +12,23 @@
 
 #define WIDTH 20
 #define HEIGHT 10
+#define INITIAL_LENGTH 1
 
 int main() {
-	srand(time(NULL));
+    srand(time(NULL));
 
-	Position position[1] = {
-		rand() % (WIDTH / 2) + 1,
-		rand() % (HEIGHT / 2) + 1
-	};
-	Snake snake = { RIGHT, position, false, 1, 0 };
-	BaseSetup baseSetup = {
-		WIDTH, HEIGHT, {WIDTH / 2, HEIGHT / 2}
-	};
+    Position *pos = malloc(INITIAL_LENGTH * sizeof(Position));
+    pos->xPos = rand() % WIDTH ; pos->yPos = rand() % HEIGHT;
 
-	while (!snake.gameover) {
-		Draw(&snake, &baseSetup);
-		Input(&snake);
-		Logic(&snake, &baseSetup);
-		sleep_ms(1000);
-	}
+    Snake snake = {RIGHT, pos, false, 1, 0};
+    BaseSetup baseSetup = {
+            WIDTH, HEIGHT, {WIDTH / 2, HEIGHT / 2}
+    };
+
+    while (!snake.gameover) {
+        Draw(&snake, &baseSetup);
+        Input(&snake);
+        Logic(&snake, &baseSetup);
+        sleep_ms(1000);
+    }
 }
