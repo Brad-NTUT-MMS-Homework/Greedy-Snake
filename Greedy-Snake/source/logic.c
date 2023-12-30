@@ -1,64 +1,113 @@
 #include <stdlib.h>
+#include <stdbool.h>
+
 #include "../include/data.h"
 
-int addLength(Snake *snake, int newXPos, int newYPos) {
-	// Calculate the new length of the position array
-	int newLength = snake->length + 1;
+int addLength(Snake *snake);
 
-	// Reallocate memory to accommodate the new length of positions
-	Position *newPositions = (Position *)realloc(snake->pos, newLength * sizeof(Position));
-	
-	// Memory allocation failed
-	if (newPositions == NULL) {
-		return -1; // Or any appropriate error code
-	}
-
-	// Update the snake's position array and length
-	snake->pos = newPositions;
-	snake->length = newLength;
-
-	// Add the new position to the end of the position array
-	snake->pos[newLength - 1].xPos = newXPos;
-	snake->pos[newLength - 1].yPos = newYPos;
-
-	return 0; // Successful addition of length
-}
+Position moveSnake(Snake *snake);
 
 void Logic(Snake *snake, BaseSetup *baseSetup) {
-	// Implementation of the Logic function
-	// Use snake and baseSetup structures for game logic
+    // Implementation of the Logic function
+    // Use snake and baseSetup structures for game logic
 
-	int snakeLength = snake->length;
-	int prevX, prevY;
-	if (snakeLength != 1) {
-		snake->pos[snakeLength - 1].xPos;
-		snake->pos[snakeLength - 1].yPos;
-	}
+    moveSnake(snake);
 
-	int prev2X, prev2Y;
-	snake->pos[snakeLength].xPos = prevX;
-	snake->pos[snakeLength].yPos = prevY;
+    if (snake->pos[0].xPos >= baseSetup->width || snake->pos[0].xPos < 0 ||
+        snake->pos[0].yPos >= baseSetup->height || snake->pos[0].yPos < 0) {
+        snake->gameover = true;
+    }
 
-	for (int i = 1; i < snake->length; i++) {
-		prev2X = snake->pos[i].xPos;
-		prev2Y = snake->pos[i].yPos;
-		snake->pos[i].xPos = prevX;
-		snake->pos[i].yPos = prevY;
-		prevX = prev2X;
-		prevY = prev2Y;
-	}
-	if (snake->pos[0].xPos >= baseSetup->width || snake->pos[0].xPos < 0 || snake->pos[0].yPos >= baseSetup->height || snake->pos[0].yPos < 0)
-		snake->gameover = 1;
 
-	for (int i = 1; i < snake->length; i++) {
-		if (snake->pos[0].xPos == snake->pos[i].xPos && snake->pos[0].yPos == snake->pos[i].yPos)
-			snake->gameover = 1;
-	}
-
-	if (baseSetup->width == baseSetup->fruit.xPos && baseSetup->height == baseSetup->fruit.yPos) {
-		snake->score += 10;
-		snake->length++;
-		baseSetup->fruit.xPos = rand() % baseSetup->width;
-		baseSetup->fruit.yPos = rand() % baseSetup->height;
-	}
+    if (snake->pos[0].xPos == baseSetup->fruit.xPos &&
+        snake->pos[0].yPos == baseSetup->fruit.yPos) {
+        snake->score += 10;
+        addLength(snake);
+        baseSetup->fruit.xPos = rand() % baseSetup->width;
+        baseSetup->fruit.yPos = rand() % baseSetup->height;
+    }
 }
+
+int addLength(Snake *snake) {
+    // Calculate the new length of the position array
+    int newLength = snake->length + 1;
+
+    // Reallocate memory to accommodate the new length of positions
+    Position *newPositions = (Position *) realloc(snake->pos, newLength * sizeof(Position));
+    // Memory allocation failed
+    if (newPositions == NULL) {
+        return -1; // Or any appropriate error code
+    }
+
+    // Update the snake's position array and length
+    snake->pos = newPositions;
+    snake->length = newLength;
+
+    switch (snake->direction) {
+        case UP:
+            snake->pos[snake->length - 1].yPos =
+                    snake->pos[snake->length - 2].yPos - 1;
+            snake->pos[snake->length - 1].xPos =
+                    snake->pos[snake->length - 2].xPos;
+            break;
+
+        case DOWN:
+            snake->pos[snake->length - 1].yPos =
+                    snake->pos[snake->length - 2].yPos + 1;
+            snake->pos[snake->length - 1].xPos =
+                    snake->pos[snake->length - 2].xPos;
+            break;
+
+        case LEFT:
+            snake->pos[snake->length - 1].xPos =
+                    snake->pos[snake->length - 2].xPos + 1;
+            snake->pos[snake->length - 1].yPos =
+                    snake->pos[snake->length - 2].yPos;
+            break;
+
+        case RIGHT:
+            snake->pos[snake->length - 1].xPos =
+                    snake->pos[snake->length - 2].xPos - 1;
+            snake->pos[snake->length - 1].yPos =
+                    snake->pos[snake->length - 2].yPos;
+            break;
+        default:
+            break;
+    }
+
+    return 0; // Successful addition of length
+}
+
+Position moveSnake(Snake *snake) {
+    int newX = snake->pos[0].xPos;
+    int newY = snake->pos[0].yPos;
+
+    // Update the head position based on the direction
+    if (snake->direction == UP) {
+        newY = snake->pos[0].yPos - 1;
+    }
+    if (snake->direction == DOWN) {
+        newY = snake->pos[0].yPos + 1;
+    }
+    if (snake->direction == LEFT) {
+        newX = snake->pos[0].xPos - 1;
+    }
+    if (snake->direction == RIGHT) {
+        newX = snake->pos[0].xPos + 1;
+    }
+
+    // Update the body positions
+    for (int i = snake->length - 1; i > 0; i--) {
+        snake->pos[i].xPos = snake->pos[i - 1].xPos;
+        snake->pos[i].yPos = snake->pos[i - 1].yPos;
+    }
+
+    // Set the new head position
+    snake->pos[0].xPos = newX;
+    snake->pos[0].yPos = newY;
+
+    // Return the new head position
+    Position newHeadPosition = {newX, newY};
+    return newHeadPosition;
+}
+
