@@ -23,6 +23,9 @@
     <ClCompile Include="source\logic.c">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="source\screen.c">
+      <Filter>source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\data.h">
@@ -38,6 +41,9 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\sleep.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\screen.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
